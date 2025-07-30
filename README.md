@@ -60,7 +60,7 @@ You connect Windsor MCP to your preferred LLM as an external connector using the
    - `https://mcp.windsor.ai/sse`
 3. Open a new chat and start with:
 <pre>
-  My Windsor.ai API key is {your-key}. {Your question here}
+My Windsor.ai API key is {your-key}. {Your question here}
 </pre>
 4. Accept connector permissions and start querying your data!
 
@@ -74,8 +74,8 @@ For users on lower-tier Claude plans or requiring custom setups for advanced fle
 ### Installation steps:
 1. Inatall mcp-proxy and copy its path.
 <pre>
-  uv tool install mcp-proxy
-  which mcp-proxy  # Copy full path
+uv tool install mcp-proxy
+which mcp-proxy  # Copy full path
 </pre>
 
 2. Configure Claude Desktop:
@@ -97,30 +97,61 @@ Open Settings → Developer → Edit Config and add:
 
 ---
 
-## Option 3: Windsor MCP with Gemini CLI
+## Option 3: Windsor MCP with Cursor
+
+### Prerequisites:
+- Cursor Desktop installed
+- Your Windsor API key
 
 ### Installation steps:
 1. Install mcp-proxy
 <pre>
-  uv tool install mcp-proxy
-  which mcp-proxy  # Copy full path
+uv tool install mcp-proxy
+which mcp-proxy  # Copy full path
+</pre>
+
+2. Open settings in Cursor Desktop. Select **Tool & Integrations** > **New MCP Server**.
+
+3. The mcp.json file will open. Paste the following script into it: 
+<pre>
+{
+  "mcpServers": {
+    "windsor": {
+      "command": "/Users/{your-username}/.local/bin/mcp-proxy",
+      "args": ["https://mcp.windsor.ai/sse"]
+    }
+  }
+}
+</pre>
+
+4. Windsor MCP will now become active in Cursor. It will ask for Windsor’s API Key in a prompt; just paste it, and you are good to go with any questions related to your data.
+
+---
+
+## Option 4: Windsor MCP with Gemini CLI
+
+### Installation steps:
+1. Install mcp-proxy
+<pre>
+uv tool install mcp-proxy
+which mcp-proxy  # Copy full path
 </pre>
 
 2. Install Gemini CLI
 Use Node.js to globally install the Gemini CLI (make sure you have Node.js 18 or later installed).
 <pre>
-  npm install -g @google/gemini-cli
+npm install -g @google/gemini-cli
 </pre>
 
 3. Configure Gemini to use Windsor MCP
 Navigate to the Gemini config directory:
 <pre>
-  cd ~/.gemini
+cd ~/.gemini
 </pre>
 If the .gemini directory doesn’t exist yet, run gemini once to generate it.
 Open the settings.json file:
 <pre>
-   nano settings.json
+nano settings.json
 </pre>
 Add the following configuration inside the JSON object:
 <pre>
@@ -138,9 +169,11 @@ Note: Make sure the overall file remains valid JSON (no trailing commas or synta
 4. Start Gemini with Windsor MCP
 Now, simply run Gemini:
 <pre>
-   gemini
+gemini
 </pre>
 You’ll be asked for your Windsor API key — paste it in to authenticate. You’re all set now!
+
+---
 
 ## ❓ FAQs
 
