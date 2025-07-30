@@ -84,7 +84,7 @@ Open Settings → Developer → Edit Config and add:
 {
   "mcpServers": {
     "windsor": {
-      "command": "/Users/<your-username>/.local/bin/mcp-proxy",
+      "command": "/Users/{your-username}/.local/bin/mcp-proxy",
       "args": ["https://mcp.windsor.ai/sse"]
     }
   }
@@ -96,6 +96,51 @@ Open Settings → Developer → Edit Config and add:
 3. Fully quit and reopen Claude. You should now see “windsor” listed in your MCP options.
 
 ---
+
+## Option 3: Windsor MCP with Gemini CLI
+
+### Installation steps:
+1. Install mcp-proxy
+<pre>
+  uv tool install mcp-proxy
+  which mcp-proxy  # Copy full path
+</pre>
+
+2. Install Gemini CLI
+Use Node.js to globally install the Gemini CLI (make sure you have Node.js 18 or later installed).
+<pre>
+  npm install -g @google/gemini-cli
+</pre>
+
+3. Configure Gemini to use Windsor MCP
+Navigate to the Gemini config directory:
+<pre>
+  cd ~/.gemini
+</pre>
+If the .gemini directory doesn’t exist yet, run gemini once to generate it.
+Open the settings.json file:
+<pre>
+   nano settings.json
+</pre>
+Add the following configuration inside the JSON object:
+<pre>
+{
+  "mcpServers": {
+    "windsor": {
+      "command": "/Users/{your-username}/.local/bin/mcp-proxy",
+      "args": ["https://mcp.windsor.ai/sse"]
+    }
+  }
+}
+</pre>
+Note: Make sure the overall file remains valid JSON (no trailing commas or syntax errors).
+
+4. Start Gemini with Windsor MCP
+Now, simply run Gemini:
+<pre>
+   gemini
+</pre>
+You’ll be asked for your Windsor API key — paste it in to authenticate. You’re all set now!
 
 ## ❓ FAQs
 
